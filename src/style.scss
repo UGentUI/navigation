@@ -1,0 +1,47 @@
+// Design Tokens
+@use "@ugent-ui/design-tokens/build/scss/_light-theme-map" as light-theme-map;
+@use "@ugent-ui/design-tokens/build/scss/_core-map" as dark-theme-map;
+@use "@ugent-ui/design-tokens/build/scss/_core-map" as core-map;
+@import "@ugent-ui/design-tokens/src/utils/scss/helpers";
+
+// Override Bootstrap
+$navbar-padding-y: token("space-0", core-map.$core);
+$navbar-brand-padding-y: token("space-0", core-map.$core);
+
+// Import Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+:host {
+  display: block; /* Ensure it has a layout */
+  .navbar {
+    background-color: token(
+      "color-elevation-surface-basic-default",
+      light-theme-map.$light
+    );
+    color: token("color-text-subtlest", light-theme-map.$light);
+    border-bottom: 1px solid
+      token("color-border-default", light-theme-map.$light);
+  }
+  .navbar-brand {
+    color: token("color-text-brand", light-theme-map.$light);
+  }
+
+  .theme-btn .icon {
+    width: 16px;
+    height: 16px;
+    fill: token("color-text-subtlest", light-theme-map.$light);
+  }
+
+  .app-title {
+    fill: token("color-text-subtle", light-theme-map.$light);
+  }
+
+  .nav-link {
+    font-weight: token("font-weight-medium", core-map.$core);
+  }
+
+  .navbar-nav .nav-link.active {
+    color: token("color-text-brand", light-theme-map.$light);
+    border-bottom: 2px solid token("color-text-brand", light-theme-map.$light);
+  }
+}

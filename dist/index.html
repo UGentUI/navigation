@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" data-color-mode="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigation webcomponent</title>
+    <link rel="stylesheet" href="/assets/reset.css" />
+    <script type="module" crossorigin src="/assets/navigation.js"></script>
+  </head>
+  <body>
+    <div>
+      <ug-navigation
+        data-links='[
+        { "name": "Home", "url": "#", "active": true },
+        { "name": "Features", "url": "#" },
+        { "name": "Projects", "url": "#" },
+        { "name": "Info", "url": "#" }
+      ]'
+      ></ug-navigation>
+    </div>
+  </body>
+</html>

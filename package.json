@@ -1,0 +1,38 @@
+{
+  "name": "@ugent-ui/navigation",
+  "version": "1.0.0-beta.1",
+  "description": "Horizontale navigatie webcomponent voor UGent webapplicaties",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UGentUI/navigation.git"
+  },
+  "keywords": [],
+  "author": "UGent DICT",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/UGentUI/navigation/issues"
+  },
+  "homepage": "https://github.com/UGentUI/navigation#readme",
+  "dependencies": {
+    "@ugent-ui/css-reset": "file:../css-reset",
+    "@ugent-ui/design-tokens": "file:../design-tokens",
+    "bootstrap": "^5.3.3",
+    "lit": "^3.1.2"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^6.0.0",
+    "postcss": "^8.4.38",
+    "sass": "^1.72.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-sass": "^0.1.0",
+    "vite-plugin-static-copy": "^1.0.5"
+  }
+}
