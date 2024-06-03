@@ -1,25 +1,20 @@
 import { defineConfig } from "vite";
-import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
   base: "/navigation/",
   css: {
     postcss: "./postcss.config.js",
   },
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        {
-          src: "node_modules/@ugent-ui/css-reset/dist/reset.css",
-          dest: "assets",
-        },
-      ],
-    }),
-  ],
   build: {
     rollupOptions: {
       output: {
         entryFileNames: "assets/navigation.js",
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === "index.css") {
+            return "assets/reset.css";
+          }
+          return "assets/[name]-[hash][extname]";
+        },
       },
     },
   },
