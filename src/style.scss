@@ -1,12 +1,13 @@
 // Design Tokens
 @use "@ugent-ui/design-tokens/build/scss/_light-theme-map" as light-theme-map;
-@use "@ugent-ui/design-tokens/build/scss/_core-map" as dark-theme-map;
+@use "@ugent-ui/design-tokens/build/scss/_dark-theme-map" as dark-theme-map;
 @use "@ugent-ui/design-tokens/build/scss/_core-map" as core-map;
 @import "@ugent-ui/design-tokens/src/utils/scss/helpers";
 
 // Override Bootstrap
 $navbar-padding-y: token("space-0", core-map.$core);
 $navbar-brand-padding-y: token("space-0", core-map.$core);
+$grid-gutter-width: map-get(core-map.$core, "space-400");
 
 // Import Bootstrap
 @import "bootstrap/scss/bootstrap";
@@ -21,27 +22,63 @@ $navbar-brand-padding-y: token("space-0", core-map.$core);
     color: token("color-text-subtlest", light-theme-map.$light);
     border-bottom: 1px solid
       token("color-border-default", light-theme-map.$light);
-  }
-  .navbar-brand {
-    color: token("color-text-brand", light-theme-map.$light);
-  }
 
-  .theme-btn .icon {
-    width: 16px;
-    height: 16px;
-    fill: token("color-text-subtlest", light-theme-map.$light);
-  }
+    .app-title {
+      fill: token("color-text-subtle", light-theme-map.$light);
+    }
 
-  .app-title {
-    fill: token("color-text-subtle", light-theme-map.$light);
-  }
+    .navbar-collapse {
+      align-items: normal;
+    }
 
-  .nav-link {
-    font-weight: token("font-weight-medium", core-map.$core);
-  }
+    .navbar-brand {
+      height: token("space-800", core-map.$core);
+    }
 
-  .navbar-nav .nav-link.active {
-    color: token("color-text-brand", light-theme-map.$light);
-    border-bottom: 2px solid token("color-text-brand", light-theme-map.$light);
+    .navbar-nav {
+      min-height: token("space-800", core-map.$core);
+
+      .nav-link {
+        font-weight: token("font-weight-medium", core-map.$core);
+        &:hover {
+          position: relative;
+          color: token("color-text-brand", light-theme-map.$light);
+        }
+        @include media-breakpoint-up(lg) {
+          &.active {
+            position: relative;
+            color: token("color-text-brand", light-theme-map.$light);
+
+            &::after {
+              content: "";
+              position: absolute;
+              left: 0;
+              bottom: token("space-0", core-map.$core);
+              width: 100%;
+              height: token("space-025", core-map.$core);
+              background-color: token(
+                "color-text-brand",
+                light-theme-map.$light
+              );
+            }
+          }
+        }
+      }
+    }
+
+    .theme-btn .icon {
+      width: token("space-200", core-map.$core);
+      height: token("space-200", core-map.$core);
+      fill: token("color-text-subtlest", light-theme-map.$light);
+    }
+
+    .navbar-toggler {
+      border: 1px solid token("color-border-default", light-theme-map.$light);
+      border-radius: token("space-050", core-map.$core);
+      &:focus {
+        box-shadow: 0 0 token("space-050", core-map.$core)
+          token("neutral-alpha-500", core-map.$core);
+      }
+    }
   }
 }
