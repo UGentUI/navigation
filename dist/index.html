@@ -10,14 +10,22 @@
   </head>
   <body>
     <div>
-      <ug-navigation
-        data-links='[
-        { "name": "Home", "url": "#", "active": true },
-        { "name": "Features", "url": "#" },
-        { "name": "Projects", "url": "#" },
-        { "name": "Info", "url": "#" }
-      ]'
-      ></ug-navigation>
+      <ug-navigation></ug-navigation>
+      <script>
+        // Define the data you want to pass to the component
+        const dataLinks = [
+          { name: "Home", url: "#", active: true },
+          { name: "Features", url: "#" },
+          { name: "Projects", url: "#" },
+          { name: "Info", url: "#" },
+        ];
+
+        // Get a reference to the custom element using querySelector
+        const ugNavigationElement = document.querySelector("ug-navigation");
+
+        // Set the property directly
+        ugNavigationElement.links = dataLinks;
+      </script>
     </div>
   </body>
 </html>
