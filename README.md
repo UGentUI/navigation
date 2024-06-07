@@ -46,6 +46,14 @@ npm add @ugent-ui/css-reset
 </html>
 ```
 
+## Component tag
+
+Gebruik de volgende tag om de component in je HTML op te nemen:
+
+```html
+<ug-navigation></ug-navigation>
+```
+
 ## Component properties
 
 - `links`: Een array van objecten die elk een link vertegenwoordigen. Elk object moet de volgende eigenschappen bevatten:
