@@ -4,6 +4,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { logoBase64 } from "./logoBase64";
 import { appTitle } from "./appTitleSvg";
 import { moonIcon, sunIcon } from "./icons";
+import { Collapse } from "bootstrap";
 
 interface NavLink {
   name: string;
@@ -39,11 +40,22 @@ export class Navigation extends LitElement {
     // Additional logic to update the app's language
   }
 
-  constructor() {
-    super();
-    const linksAttr = this.getAttribute("data-links");
-    if (linksAttr) {
-      this.links = JSON.parse(linksAttr);
+  handleLinkClick(event: Event, url: string) {
+    event.preventDefault();
+    this.dispatchEvent(new CustomEvent("navigate", { detail: { url } }));
+  }
+
+  firstUpdated() {
+    // Initialize Bootstrap collapse manually
+    const toggler = this.shadowRoot?.querySelector(".navbar-toggler");
+    const collapseElement = this.shadowRoot?.querySelector("#navbarNav");
+    if (toggler && collapseElement) {
+      toggler.addEventListener("click", () => {
+        const bsCollapse =
+          Collapse.getInstance(collapseElement) ||
+          new Collapse(collapseElement, { toggle: false });
+        bsCollapse.toggle();
+      });
     }
   }
 
@@ -51,7 +63,7 @@ export class Navigation extends LitElement {
     return html`
       <div>
         <nav class="navbar navbar-expand-lg">
-          <div class="container-fluid" style="height:60px">
+          <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
               <img
                 src="${logoBase64}"
@@ -64,44 +76,38 @@ export class Navigation extends LitElement {
               class="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div
-              class="collapse navbar-collapse"
-              style="height:100%"
-              id="navbarNavAltMarkup"
-            >
-              <div
-                class="navbar-nav"
-                d-flex
-                align-items-center
-                style="height:100%"
-              >
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <div class="navbar-nav">
                 ${this.links.map(
                   (link) => html`
                     <a
-                      class="nav-link ${link.active ? "active" : ""} d-flex
-                align-items-center"
+                      class="nav-link ${link.active
+                        ? "active"
+                        : ""} d-flex align-items-center"
                       href="${link.url}"
+                      @click="${(event: Event) =>
+                        this.handleLinkClick(event, link.url)}"
                       >${link.name}</a
                     >
                   `
                 )}
               </div>
               <div class="ms-auto d-flex align-items-center">
-                <a
-                  class="nav-link ms-3"
+                <!-- <a
+                  class="nav-link"
                   href="#"
                   @click="${this.switchLanguage}"
                   aria-label="Switch language"
                 >
                   ${this.language === "nl" ? "EN" : "NL"}
-                </a>
+                </a> -->
                 <button
                   class="btn theme-btn mb-1"
                   @click="${this.switchTheme}"
